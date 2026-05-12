@@ -23,7 +23,7 @@ namespace Techgen_console_menu_app.Screens
         {
             return input switch
             {
-                //"1" => ScreenResult.Push(new GameModeScreen()),
+                "1" => ScreenResult.Push(new GameModeScreen()),
                 "2" => ScreenResult.Push(new SettingsScreen()),
                 "3" => ScreenResult.Push(new AboutScreen()),
                 "4" => ScreenResult.Exit(),

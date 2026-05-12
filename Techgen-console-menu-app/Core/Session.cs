@@ -1,4 +1,6 @@
 ﻿
+using Techgen_console_menu_app.Enums;
+
 namespace Techgen_console_menu_app.Core
 {
     /// <summary>
@@ -7,7 +9,8 @@ namespace Techgen_console_menu_app.Core
     internal class Session
     {
         public static string Username { get; set; } = "";
-        public static char PlayerSign { get; set; }
-        //public static GameMode Mode { get; set; }
+        public static GameModeTypes GameMode{ get; set; }
+        public static char Player1Sign { get; set; }
+        public static char Player2Sign { get; set; }
     }
 }

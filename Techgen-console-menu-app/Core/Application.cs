@@ -14,7 +14,7 @@ namespace Techgen_console_menu_app.Core
         public Application()
         {
             _navigation = new NavigationManager();
-            _navigation.Push(new MainMenuScreen());
+            _navigation.Push(new SetUsernameScreen());
         }
 
         public void Run()
@@ -22,13 +22,20 @@ namespace Techgen_console_menu_app.Core
             while (_running)
             {
                 IScreen current = _navigation.CurrentScreen;
-                current.Render();
 
+                if (current is GameBoardScreen gameScreen)
+                {
+                    ScreenResult result = gameScreen.Run();
+                    ProcessResult(result);
+                    continue;
+                }
+
+                current.Render();
                 string input = Console.ReadLine()?.Trim() ?? "";
                 if (string.IsNullOrWhiteSpace(input)) continue;
 
-                ScreenResult result = current.HandleInput(input);
-                ProcessResult(result);
+                ScreenResult screenResult = current.HandleInput(input);
+                ProcessResult(screenResult);
             }
         }
 

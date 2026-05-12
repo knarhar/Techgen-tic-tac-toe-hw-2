@@ -45,6 +45,7 @@ public abstract class BaseScreen : IScreen
     {
         Console.WriteLine();
         Console.WriteLine("[back] Return | [exit] Exit");
+        Console.WriteLine();
     }
 
     public ScreenResult HandleInput(string input)
