@@ -1,39 +1,33 @@
-﻿namespace Techgen_console_menu_app.Screens
+﻿using Techgen_console_menu_app.Core;
+using Techgen_console_menu_app.Structs;
+
+namespace Techgen_console_menu_app.Screens
 {
     public class MainMenuScreen : BaseScreen
     {
-        public override void RenderContent()
+        public MainMenuScreen() : base("Main Menu")
         {
-            Console.WriteLine("MAIN MENU");
-            Console.WriteLine("1 - Settings");
-            Console.WriteLine("2 - About");
+            SetOptions(4);
+            AddOption("1", "Play");
+            AddOption("2", "Settings");
+            AddOption("3", "About");
+            AddOption("4", "Quit");
         }
 
-        public override ScreenResult HandleInput(string input)
+        protected override void RenderContent()
+        {
+            Console.WriteLine($"Welcome, {Session.Username}!");
+        }
+
+        protected override ScreenResult HandleOption(string input)
         {
             return input switch
             {
-                "1" => new ScreenResult
-                {
-                    ActionType = ScreenActionType.Push,
-                    NextScreen = new SettingsScreen()
-                },
-
-                "2" => new ScreenResult
-                {
-                    ActionType = ScreenActionType.Push,
-                    NextScreen = new AboutScreen()
-                },
-
-                "exit" => new ScreenResult
-                {
-                    ActionType = ScreenActionType.Exit
-                },
-
-                _ => new ScreenResult
-                {
-                    ActionType = ScreenActionType.None
-                }
+                //"1" => ScreenResult.Push(new GameModeScreen()),
+                "2" => ScreenResult.Push(new SettingsScreen()),
+                "3" => ScreenResult.Push(new AboutScreen()),
+                "4" => ScreenResult.Exit(),
+                _ => ScreenResult.None()
             };
         }
     }

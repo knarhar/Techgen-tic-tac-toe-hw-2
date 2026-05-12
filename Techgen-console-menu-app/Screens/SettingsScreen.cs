@@ -1,31 +1,31 @@
-﻿namespace Techgen_console_menu_app.Screens
+﻿using Techgen_console_menu_app.Core;
+using Techgen_console_menu_app.Structs;
+
+namespace Techgen_console_menu_app.Screens
 {
     public class SettingsScreen : BaseScreen
     {
-        public override void RenderContent()
+        public SettingsScreen() : base("Settings")
         {
-            Console.WriteLine("This is Settings.");
+            SetOptions(1);
+            AddOption("1", "Change username");
         }
 
-        public override ScreenResult HandleInput(string input)
+        protected override void RenderContent()
         {
-            return input switch
+            Console.WriteLine($"Current username: {Session.Username}");
+        }
+
+        protected override ScreenResult HandleOption(string input)
+        {
+            if (input == "1")
             {
-                "back" => new ScreenResult
-                {
-                    ActionType = ScreenActionType.Back
-                },
-
-                "exit" => new ScreenResult
-                {
-                    ActionType = ScreenActionType.Exit
-                },
-
-                _ => new ScreenResult
-                {
-                    ActionType = ScreenActionType.None
-                }
-            };
+                Console.Write("Enter new username: ");
+                string name = Console.ReadLine() ?? "";
+                if (!string.IsNullOrWhiteSpace(name))
+                    Session.Username = name;
+            }
+            return ScreenResult.None();
         }
     }
 }

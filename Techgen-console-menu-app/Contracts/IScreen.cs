@@ -1,4 +1,4 @@
-﻿using Techgen_console_menu_app.Screens;
+﻿using Techgen_console_menu_app.Structs;
 
 namespace Techgen_console_menu_app.Contracts
 {

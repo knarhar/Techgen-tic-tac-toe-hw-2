@@ -1,30 +1,24 @@
-﻿namespace Techgen_console_menu_app.Screens
+﻿using Techgen_console_menu_app.Structs;
+
+namespace Techgen_console_menu_app.Screens
 {
     public class AboutScreen : BaseScreen
     {
-        public override void RenderContent()
+        public AboutScreen() : base("About me"){}
+        protected override void RenderContent()
         {
-            Console.WriteLine("This is About.");
+            Console.WriteLine("Who am I?");
+            Console.WriteLine();
+            Console.WriteLine("-- Knarik Developer");
+            Console.WriteLine("-- from TechGen ACA classes");
+            Console.WriteLine("-- 2026");
         }
 
-        public override ScreenResult HandleInput(string input)
+        protected override ScreenResult HandleOption(string input)
         {
             return input switch
             {
-                "back" => new ScreenResult
-                {
-                    ActionType = ScreenActionType.Back
-                },
-
-                "exit" => new ScreenResult
-                {
-                    ActionType = ScreenActionType.Exit
-                },
-
-                _ => new ScreenResult
-                {
-                    ActionType = ScreenActionType.None
-                }
+                _ => ScreenResult.None()
             };
         }
     }
