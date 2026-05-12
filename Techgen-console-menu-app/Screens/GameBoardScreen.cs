@@ -91,7 +91,7 @@ namespace Techgen_console_menu_app.Screens
 
                     Console.WriteLine("Press any key to return to menu...");
                     Console.ReadKey(true);
-                    return ScreenResult.Back();
+                    return ScreenResult.Push(new MainMenuScreen());
                 }
 
                 _currentPlayerIndex = (_currentPlayerIndex + 1) % 2;
