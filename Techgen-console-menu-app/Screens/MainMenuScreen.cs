@@ -16,7 +16,7 @@ namespace Techgen_console_menu_app.Screens
 
         protected override void RenderContent()
         {
-            Console.WriteLine($"Welcome, {Session.Username}!");
+            Console.WriteLine($"Welcome, {Session.Username1}!");
         }
 
         protected override ScreenResult HandleOption(string input)

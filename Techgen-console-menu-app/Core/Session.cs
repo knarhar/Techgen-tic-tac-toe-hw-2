@@ -8,7 +8,8 @@ namespace Techgen_console_menu_app.Core
     /// </summary>
     internal class Session
     {
-        public static string Username { get; set; } = "";
+        public static string Username1 { get; set; } = "";
+        public static string Username2 { get; set; } = "";
         public static GameModeTypes GameMode{ get; set; }
         public static char Player1Sign { get; set; }
         public static char Player2Sign { get; set; }

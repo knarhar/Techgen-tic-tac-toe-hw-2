@@ -41,6 +41,14 @@ namespace Techgen_console_menu_app.Game
         public char[] GetCells() => _cells;
         public Cell GetCursor() => _cursor;
 
+        public void ClearCells()
+        {
+            for (int i = 0; i < _cells.Length; i++)
+            {
+                _cells[i] = '\0';
+            }
+        }
+
         public GameResult CheckResult()
         {
             int[][] wins = {
@@ -110,7 +118,7 @@ namespace Techgen_console_menu_app.Game
             Console.WriteLine($"Current Turn: {currentPlayerName} ({currentPlayerSign})");
             Console.ResetColor();
             Console.WriteLine();
-            Console.WriteLine($"Use Arrow Keys to navigate, Enter to place {currentPlayerSign}");
+            Console.WriteLine($"Use Arrow Keys to navigate,\nEnter to place {currentPlayerSign}");
         }
     }
 }

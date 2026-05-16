@@ -18,10 +18,10 @@ namespace Techgen_console_menu_app.Screens
             _currentPlayerIndex = 0;
 
             _players = new IGamePlayer[2];
-            _players[0] = new HumanPlayer(Session.Username, Session.Player1Sign);
+            _players[0] = new HumanPlayer(Session.Username1, Session.Player1Sign);
 
             if (Session.GameMode == GameModeTypes.PvP)
-                _players[1] = new HumanPlayer("Player 2", Session.Player2Sign);
+                _players[1] = new HumanPlayer(Session.Username2, Session.Player2Sign);
             else
                 _players[1] = new ComputerPlayer(Session.Player2Sign);
         }
@@ -91,6 +91,7 @@ namespace Techgen_console_menu_app.Screens
 
                     Console.WriteLine("Press any key to return to menu...");
                     Console.ReadKey(true);
+                    _board.ClearCells();
                     return ScreenResult.Push(new MainMenuScreen());
                 }
 

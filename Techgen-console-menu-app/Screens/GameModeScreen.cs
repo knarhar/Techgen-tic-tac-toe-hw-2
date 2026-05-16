@@ -19,7 +19,7 @@ namespace Techgen_console_menu_app.Screens
             {
                 case "1":
                     Session.GameMode = GameModeTypes.PvP;
-                    return ScreenResult.Push(new SignSelectionScreen());
+                    return ScreenResult.Push(new SetUsernameScreen(true));
                 case "2":
                     Session.GameMode = GameModeTypes.PvC;
                     return ScreenResult.Push(new SignSelectionScreen());

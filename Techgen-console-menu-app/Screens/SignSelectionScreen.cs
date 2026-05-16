@@ -1,4 +1,5 @@
 ﻿using Techgen_console_menu_app.Core;
+using Techgen_console_menu_app.Enums;
 using Techgen_console_menu_app.Screens;
 using Techgen_console_menu_app.Structs;
 
@@ -13,7 +14,9 @@ internal class SignSelectionScreen : BaseScreen
 
     protected override void RenderContent()
     {
-        Console.WriteLine("Choose your sign:");
+        Console.WriteLine($"{Session.Username1} Choose your sign:");
+        if (Session.GameMode == GameModeTypes.PvP) 
+            Console.WriteLine($"The opposite sign will be assigned to {Session.Username2}");
     }
 
     protected override ScreenResult HandleOption(string input)

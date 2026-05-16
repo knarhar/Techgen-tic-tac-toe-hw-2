@@ -13,7 +13,7 @@ namespace Techgen_console_menu_app.Screens
 
         protected override void RenderContent()
         {
-            Console.WriteLine($"Current username: {Session.Username}");
+            Console.WriteLine($"Current username: {Session.Username1}");
         }
 
         protected override ScreenResult HandleOption(string input)
@@ -23,7 +23,7 @@ namespace Techgen_console_menu_app.Screens
                 Console.Write("Enter new username: ");
                 string name = Console.ReadLine() ?? "";
                 if (!string.IsNullOrWhiteSpace(name))
-                    Session.Username = name;
+                    Session.Username1 = name;
             }
             return ScreenResult.None();
         }
