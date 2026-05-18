@@ -1,21 +1,20 @@
-﻿using Techgen_console_menu_app.Contracts;
-
-namespace Techgen_console_menu_app.Navigation
+namespace MenuLib
 {
-    internal class NavigationStack
+    public class MenuStack
     {
-        private IScreen[] _items;
+        private Menu[] _items;
         private int _count;
 
         public int Count => _count;
 
-        public NavigationStack(int capacity = 2)
+        public MenuStack(int capacity = 2)
         {
-            _items = new IScreen[capacity];
+            _items = new Menu[capacity];
             _count = 0;
         }
 
-        public void Push(IScreen item)
+
+        public void Push(Menu item)
         {
             if (_count == _items.Length)
             {
@@ -26,7 +25,18 @@ namespace Techgen_console_menu_app.Navigation
             _count++;
         }
 
-        public IScreen Peek()
+        public Menu Pop()
+        {
+            if (_count == 0)
+            {
+                throw new InvalidOperationException("Stack is empty");
+            }
+
+            _count--;
+            return _items[_count];
+        }
+
+        public Menu Peek()
         {
             if (_count == 0)
             {
@@ -36,20 +46,9 @@ namespace Techgen_console_menu_app.Navigation
             return _items[_count - 1];
         }
 
-        public IScreen Pop()
-        {
-            if (_count != 0)
-            {
-                _count--;
-                return _items[_count];
-            }
-
-            throw new InvalidOperationException("Stack is empty.");
-        }
-
         private void Resize()
         {
-            IScreen[] newItems = new IScreen[_items.Length * 2];
+            Menu[] newItems = new Menu[_items.Length * 2];
             for (int i = 0; i < _items.Length; i++)
             {
                 newItems[i] = _items[i];
@@ -57,6 +56,5 @@ namespace Techgen_console_menu_app.Navigation
 
             _items = newItems;
         }
-
     }
 }

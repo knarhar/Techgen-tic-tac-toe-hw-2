@@ -1,44 +1,49 @@
-﻿using Techgen_console_menu_app.Contracts;
+﻿using MenuLib;
+using Techgen_console_menu_app.Contracts;
 using Techgen_console_menu_app.Core;
 using Techgen_console_menu_app.Enums;
 using Techgen_console_menu_app.Game;
 using Techgen_console_menu_app.Structs;
 
-namespace Techgen_console_menu_app.Screens
+namespace Techgen_console_menu_app.Menus
 {
-    public class GameBoardScreen : BaseScreen
+    public class GameBoardMenu : Menu
     {
         private readonly GameBoard _board;
         private readonly IGamePlayer[] _players;
         private int _currentPlayerIndex;
 
-        public GameBoardScreen() : base("Tic Tac Toe")
+        public GameBoardMenu() : base("Tic Tac Toe")
         {
             _board = new GameBoard();
             _currentPlayerIndex = 0;
-
             _players = new IGamePlayer[2];
             _players[0] = new HumanPlayer(Session.Username1, Session.Player1Sign);
-
-            if (Session.GameMode == GameModeTypes.PvP)
-                _players[1] = new HumanPlayer(Session.Username2, Session.Player2Sign);
-            else
-                _players[1] = new ComputerPlayer(Session.Player2Sign);
+            _players[1] = Session.GameMode == GameModeTypes.PvP
+                ? (IGamePlayer)new HumanPlayer(Session.Username2, Session.Player2Sign)
+                : new ComputerPlayer(Session.Player2Sign);
         }
 
-        protected override void RenderContent() { }
+        protected override void InternalDisplay() { }
 
-        protected override ScreenResult HandleOption(string input)
+        public override NavigationResult Display()
         {
-            return ScreenResult.None();
+            RunGame();
+            _board.ClearCells();
+            return NavigationResult.GoTo(new MainMenu());
         }
 
-        public ScreenResult Run()
+        private void RunGame()
         {
             while (true)
             {
                 IGamePlayer current = _players[_currentPlayerIndex];
 
+                Console.Clear();
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine($"{_players[0].Name} ({_players[0].Sign}) vs {_players[1].Name} ({_players[1].Sign})");
+                Console.ResetColor();
+                Console.WriteLine();
                 _board.Render(
                     _players[0].Name, _players[0].Sign,
                     _players[1].Name, _players[1].Sign,
@@ -54,16 +59,10 @@ namespace Techgen_console_menu_app.Screens
                 else
                 {
                     ConsoleKey key = Console.ReadKey(true).Key;
-
                     if (key == ConsoleKey.Enter)
                     {
                         bool placed = _board.TryPlaceSign(current.Sign);
-                        if (!placed)
-                        {
-                            Console.WriteLine("Cell is taken! Press any key...");
-                            Console.ReadKey(true);
-                            continue;
-                        }
+                        if (!placed) continue;
                     }
                     else
                     {
@@ -73,7 +72,6 @@ namespace Techgen_console_menu_app.Screens
                 }
 
                 GameResult result = _board.CheckResult();
-
                 if (result.IsFinished)
                 {
                     Console.Clear();
@@ -83,21 +81,21 @@ namespace Techgen_console_menu_app.Screens
                         current.Name, current.Sign
                     );
                     Console.WriteLine();
-
-                    if (result.IsDraw)
-                        Console.WriteLine("It's a draw!");
-                    else
-                        Console.WriteLine($"{current.Name} ({current.Sign}) wins!");
-
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.WriteLine(result.IsDraw ? "It's a draw!" : $"{current.Name} ({current.Sign}) wins!");
+                    Console.ResetColor();
                     Console.WriteLine("Press any key to return to menu...");
                     Console.ReadKey(true);
-                    _board.ClearCells();
-                    return ScreenResult.Push(new MainMenuScreen());
+                    return;
                 }
 
                 _currentPlayerIndex = (_currentPlayerIndex + 1) % 2;
             }
         }
+
+        protected override NavigationResult HandleOption(string option)
+        {
+            return NavigationResult.None();
+        }
     }
 }
-

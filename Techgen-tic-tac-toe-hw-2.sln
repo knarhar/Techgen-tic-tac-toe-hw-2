@@ -5,6 +5,8 @@ VisualStudioVersion = 17.10.35013.160
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Techgen-tic-tac-toe-hw-2", "Techgen-console-menu-app\Techgen-tic-tac-toe-hw-2.csproj", "{14C94120-65BE-45F5-B1A7-30CC836B4FA6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MenuLib", "MenuLib\MenuLib.csproj", "{A4939BD1-DDC9-4EC8-B6D7-FC760FAE0A18}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{14C94120-65BE-45F5-B1A7-30CC836B4FA6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{14C94120-65BE-45F5-B1A7-30CC836B4FA6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{14C94120-65BE-45F5-B1A7-30CC836B4FA6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A4939BD1-DDC9-4EC8-B6D7-FC760FAE0A18}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A4939BD1-DDC9-4EC8-B6D7-FC760FAE0A18}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A4939BD1-DDC9-4EC8-B6D7-FC760FAE0A18}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A4939BD1-DDC9-4EC8-B6D7-FC760FAE0A18}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
